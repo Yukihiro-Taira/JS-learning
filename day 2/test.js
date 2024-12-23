@@ -39,7 +39,7 @@ function DisplayTodos () {
 	todoList.innerHTML = "";
 
 	todos.forEach(todo => {
-		const todoItem = document.createElement('div');
+		const todoList = document.createElement('div');
 		todoItem.classList.add('todo-item');
 
 		const label = document.createElement('label');

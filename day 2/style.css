@@ -28,8 +28,8 @@ input:not([type="radio"]):not([type="checkbox"]), button {
 }
 
 body{
-    background: var(--light);
-    color: var(--dark);
+    background: var(--dark);
+    color: var(--light);
 }
 
 section {
@@ -40,7 +40,7 @@ section {
 }
 
 h3 {
-    color: var(--dark);
+    color: var(--light);
     font-size: 1rem;
     font-weight: 400;
     margin-bottom: 0.5rem;
@@ -65,7 +65,7 @@ h4{
 
 .greeting .title,
 .greeting .title input {
-    color: var(--dark);
+    color: var(--light);
     font-size: 1.5rem;
     font-weight: 700;
 }
@@ -75,7 +75,7 @@ h4{
     width: 100%;
     font-size: 1.125rem;
     padding: 1rem 1.5rem;
-    color: var(--dark);
+    color: var(--light);
     background-color: #FFF;
     border-radius: 0.5rem;
     box-shadow: var(--shadow);
@@ -188,7 +188,7 @@ input:checked ~ .bubble::after{
     flex: 1 1 0%
 }
 .todo-item .todo-content input {
-    color: var(--dark);
+    color: var(--light);
     font-size: 1.125rem;
 }
 

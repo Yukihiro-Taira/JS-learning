@@ -42,6 +42,8 @@ button{
 }
 button:hover{
     background-color: hsl(0, 0%, 40%);
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
 }
 button:active{
     background-color: hsl(0, 0%, 50%);

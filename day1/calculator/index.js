@@ -18,17 +18,17 @@ function calculate(){
     }
 }
 
-function keyAnimation(){
-    //Movement Animation to happen
-    const card = document.querySelector(".calculator");
-    const opBtn = document.querySelector(".keys");
+// function keyAnimation(){
+//     //Movement Animation to happen
+//     const card = document.querySelector(".calculator");
+//     const opBtn = document.querySelector(".keys");
 
-    //Moving Animation Event
-    opBtn.addEventListner('mousemove', (e) => {
-        let xAxis = (window.innerWidth / 2 - e.pageX) / 10;
-        let yAxis = (window.innerHeight / 2 - e.pageX) / 10;
+//     //Moving Animation Event
+//     opBtn.addEventListner('mousemove', (e) => {
+//         let xAxis = (window.innerWidth / 2 - e.pageX) / 10;
+//         let yAxis = (window.innerHeight / 2 - e.pageX) / 10;
 
-        card.computedStyleMap.transform = `rotateY(${yAxis}deg) rotateX(${xAxis})`;
-    });
+//         card.computedStyleMap.transform = `rotateY(${yAxis}deg) rotateX(${xAxis})`;
+//     });
 
-}
+// }

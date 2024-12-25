@@ -10,12 +10,23 @@ body{
     rgba(211, 211, 211, 0.75));
     perspective: 1000px;
 }
+
+.container{
+    z-index: 1;
+    color: brown;
+    transform-style: preserve-3d;
+    
+}
+
+
 #calculator{
     font-family: Arial, Helvetica, sans-serif;
     background-color: hsl(0, 0%, 15%);
     border-radius: 15px;
     max-width: 500px;
     overflow: hidden;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
+    transform-style: preserve-3d;
 }
 #display{
     width: 100%;
@@ -65,3 +76,4 @@ button:active{
 .operator-btn:active{
     background-color: hsl(35, 100%, 75%);
 }
+

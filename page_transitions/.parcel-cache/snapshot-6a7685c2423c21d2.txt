@@ -1,0 +1,15 @@
+14
+74C:\Users\One Dot Eleven\Documents\JS-learning\page_transitions\js\index.js133797006242113195 0
+75C:\Users\One Dot Eleven\Documents\JS-learning\page_transitions\package.json133797003325614706 0
+67C:\Users\One Dot Eleven\Documents\JS-learning\page_transitions\dist133797007802075036 1
+73C:\Users\One Dot Eleven\Documents\JS-learning\page_transitions\index.html133797006740175513 0
+86C:\Users\One Dot Eleven\Documents\JS-learning\page_transitions\dist\index.78cc32dd.css133797007802052561 0
+65C:\Users\One Dot Eleven\Documents\JS-learning\page_transitions\js133797005322240210 1
+68C:\Users\One Dot Eleven\Documents\JS-learning\page_transitions\style133797005439715911 1
+78C:\Users\One Dot Eleven\Documents\JS-learning\page_transitions\style\style.css133797005118126437 0
+90C:\Users\One Dot Eleven\Documents\JS-learning\page_transitions\dist\index.78cc32dd.css.map133797007802065078 0
+85C:\Users\One Dot Eleven\Documents\JS-learning\page_transitions\dist\index.9345d665.js133797007801967462 0
+89C:\Users\One Dot Eleven\Documents\JS-learning\page_transitions\dist\index.9345d665.js.map133797007801977449 0
+78C:\Users\One Dot Eleven\Documents\JS-learning\page_transitions\dist\index.html133797007801847443 0
+96C:\Users\One Dot Eleven\Documents\JS-learning\page_transitions\dist\page_transitions.3464ddca.js133797007801857444 0
+100C:\Users\One Dot Eleven\Documents\JS-learning\page_transitions\dist\page_transitions.3464ddca.js.map133797007801887469 0

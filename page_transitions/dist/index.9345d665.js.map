@@ -1,0 +1,1 @@
+{"mappings":"AAAA,MAAM,MAAM;IACR,QAAQ,GAAG,CAAC;AAChB","sources":["js/index.js"],"sourcesContent":["const run = () =>{\r\n    console.log('test this is running!!');\r\n}"],"names":[],"version":3,"file":"index.9345d665.js.map","sourceRoot":"/__parcel_source_root/"}

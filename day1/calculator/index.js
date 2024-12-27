@@ -17,18 +17,3 @@ function calculate(){
         display.value="Error"
     }
 }
-
-// function keyAnimation(){
-//     //Movement Animation to happen
-//     const card = document.querySelector(".calculator");
-//     const opBtn = document.querySelector(".keys");
-
-//     //Moving Animation Event
-//     opBtn.addEventListner('mousemove', (e) => {
-//         let xAxis = (window.innerWidth / 2 - e.pageX) / 10;
-//         let yAxis = (window.innerHeight / 2 - e.pageX) / 10;
-
-//         card.computedStyleMap.transform = `rotateY(${yAxis}deg) rotateX(${xAxis})`;
-//     });
-
-// }

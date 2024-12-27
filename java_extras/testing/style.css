@@ -73,6 +73,7 @@
   grid-template-columns: repeat(4,1fr);
   gap: 10px;
   padding: 25px;
+  transform-style: preserve-3d;
 
 }
 
@@ -94,7 +95,7 @@ button:hover{
   cursor: pointer;
 }
 button:active{
-  background-color: hsl(0, 0%, 50%);
+  background-color: hsl(9, 100%, 65%);
 }
 .operator-btn{
   background-color: hsl(35, 100%, 55%);
@@ -103,7 +104,7 @@ button:active{
   background-color: hsl(35, 100%, 65%);
 }
 .operator-btn:active{
-  background-color: hsl(35, 100%, 75%);
+  background-color: hsl(9, 100%, 65%);
 }
 
   

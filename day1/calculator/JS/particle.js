@@ -2,21 +2,17 @@
 const canvas = document.getElementById("canvas1");
 const ctx = canvas.getContext("2d");
 
-//Set canvas to window size
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-
-//create shorthand var
 const w = window.innerWidth;
 const h = window.innerHeight;
-
-//create array to store pops
 const particlesArray = [];
-
-//create hue var
 let hue = 0;
 
-//---------------------------------------------------------------------------//
+
+
+
+////////////////////////////////////////////////////////////////////////////////
 
 ctx.fillStyle = 'white';
 ctx.fillRect(w/2, h/2 , 150, 50);
@@ -37,8 +33,7 @@ const mouse = {
 canvas.addEventListener("click", function(event){
     mouse.x = event.x;
     mouse.y = event.y;
-    //change 'i' for to change particle count
-    for (let i = 0; i<100; i++){
+    for (let i = 0; i<10; i++){
     particlesArray.push(new Particle());
     };
 });
@@ -46,13 +41,12 @@ canvas.addEventListener("click", function(event){
 canvas.addEventListener("mousemove", function(event){
     mouse.x = event.x;
     mouse.y = event.y;
-    //change 'i' for to change particle count
-    for(let i = 0; i<1; i++){
+    for(let i = 0; i<2; i++){
     particlesArray.push(new Particle());
     };
 })
 
-//---------------------------------------------------------------------------//
+////////////////////////////////////////////////////////////////////////////////
 
 class Particle{
     constructor(){
@@ -112,11 +106,11 @@ function particleConfig(){
 
 function animate(){
     //clear all pops on canvas
-    //ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     //create trails w/ cd
-    ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
-    ctx.fillRect(0,0,canvas.width,canvas.height)
+    //ctx.fillStyle = "rgba(0, 0, 0, 0.02)";
+    //ctx.fillRect(0,0,canvas.width,canvas.height)
     
     
     particleConfig();

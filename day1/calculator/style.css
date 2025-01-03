@@ -110,3 +110,10 @@ button:active{
 #img{
   
 }
+
+#canvas1{
+  position: absolute;
+  
+  display: flex;
+  
+}

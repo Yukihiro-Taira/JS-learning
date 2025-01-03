@@ -8,36 +8,37 @@
     <script src="/JS/calculator.js" defer></script>
     <script src="/JS/app.js" defer></script>
     <script src="/JS/pixelate.js" defer></script>
+    <script src="/JS/particle.js" defer></script>
 </head>
 <body>
+    <canvas id="canvas1">
+        <div class="container">
+            <div class="card">
+                <input id="display" readonly>
+                    <span id="keys">
+                        <span id="key1"><button onclick="clearDisplay('C')" class="operator-btn">C</button></span>
+                        <span id="key2"><button onclick="appendToDisplay('7')">7</button></span>
+                        <span id="key3"><button onclick="appendToDisplay('8')">8</button></span>
+                        <span id="key4"><button onclick="appendToDisplay('9')">9</button></span>
+                        <span id="key5"><button onclick="appendToDisplay('-')" class="operator-btn">-</button></span>
+                        <span id="key6"><button onclick="appendToDisplay('4')">4</button></span>
+                        <span id="key7"><button onclick="appendToDisplay('5')">5</button></span>
+                        <span id="key8"><button onclick="appendToDisplay('6')">6</button></span>
+                        <span id="key9"><button onclick="appendToDisplay('*')" class="operator-btn">*</button></span>
+                        <span id="key10"><button onclick="appendToDisplay('1')">1</button></span>
+                        <span id="key11"><button onclick="appendToDisplay('2')">2</button></span>
+                        <span id="key12"><button onclick="appendToDisplay('3')">3</button></span>
+                        <span id="key13"><button onclick="appendToDisplay('/')" class="operator-btn">/</button></span>
+                        <span id="key14"><button onclick="appendToDisplay('0')">0</button></span>
+                        <span id="key15"><button onclick="appendToDisplay('.')">.</button></span>
+                        <span id="key16"><button onclick="calculate()">=</button></span>
+                        <span id="key17"><button onclick="appendToDisplay('+')" class="operator-btn">+</button></span>
+                        
+                    </span>
+                </input>
+            </div>
     
-    <div class="container">
-        <div class="card">
-            <input id="display" readonly>
-                <span id="keys">
-                    <span id="key1"><button onclick="clearDisplay('C')" class="operator-btn">C</button></span>
-                    <span id="key2"><button onclick="appendToDisplay('7')">7</button></span>
-                    <span id="key3"><button onclick="appendToDisplay('8')">8</button></span>
-                    <span id="key4"><button onclick="appendToDisplay('9')">9</button></span>
-                    <span id="key5"><button onclick="appendToDisplay('-')" class="operator-btn">-</button></span>
-                    <span id="key6"><button onclick="appendToDisplay('4')">4</button></span>
-                    <span id="key7"><button onclick="appendToDisplay('5')">5</button></span>
-                    <span id="key8"><button onclick="appendToDisplay('6')">6</button></span>
-                    <span id="key9"><button onclick="appendToDisplay('*')" class="operator-btn">*</button></span>
-                    <span id="key10"><button onclick="appendToDisplay('1')">1</button></span>
-                    <span id="key11"><button onclick="appendToDisplay('2')">2</button></span>
-                    <span id="key12"><button onclick="appendToDisplay('3')">3</button></span>
-                    <span id="key13"><button onclick="appendToDisplay('/')" class="operator-btn">/</button></span>
-                    <span id="key14"><button onclick="appendToDisplay('0')">0</button></span>
-                    <span id="key15"><button onclick="appendToDisplay('.')">.</button></span>
-                    <span id="key16"><button onclick="calculate()">=</button></span>
-                    <span id="key17"><button onclick="appendToDisplay('+')" class="operator-btn">+</button></span>
-                    
-                </span>
-            </input>
         </div>
-           
-        <img id="image1" src="Image1.jpg">
-    </div>
+    </canvas>
 </body>
 </html>

@@ -128,7 +128,7 @@ function animate(timeStamp){
     this.lastTime = timeStamp;
     ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
     ctx.fillRect(0,0,canvas.width,canvas.height)
-    console.log(deltaTime);
+    //console.log(deltaTime);
     particleConfig();
     hue+=5;
     requestAnimationFrame(animate)

@@ -20,6 +20,8 @@ let hue = 0;
 
 ctx.fillStyle = 'white';
 ctx.fillRect(w/2, h/2 , 150, 50);
+ctx.fillText = 'Loading...';
+console.log(ctx);
 
 window.addEventListener("resize", function(){
     canvas.width = window.innerWidth;
@@ -29,10 +31,14 @@ window.addEventListener("resize", function(){
     ctx.fillRect(window.innerWidth/2, window.innerHeight/2 , 150, 50);
 });
 
+//---------------------------------------------------------------------------//
+
 const mouse = {
     x: undefined,
     y: undefined,
 }
+
+//---------------------------------------------------------------------------//
 
 canvas.addEventListener("click", function(event){
     mouse.x = event.x;
@@ -42,6 +48,8 @@ canvas.addEventListener("click", function(event){
     particlesArray.push(new Particle());
     };
 });
+
+//---------------------------------------------------------------------------//
 
 canvas.addEventListener("mousemove", function(event){
     mouse.x = event.x;
@@ -62,6 +70,7 @@ class Particle{
         this.speedX = Math.random() * 3 - 1.5;
         this.speedY = Math.random() * 3 - 1.5;
         this.color = 'hsl(' + hue + ', 100%, 50%)';
+        this.lastTime = 0;
     }
     update(){
         this.x += this.speedX;
@@ -110,17 +119,18 @@ function particleConfig(){
     }
 }
 
-function animate(){
+function animate(timeStamp){
     //clear all pops on canvas
     //ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     //create trails w/ cd
+    const deltaTime = timeStamp - this.lastTime;
+    this.lastTime = timeStamp;
     ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
     ctx.fillRect(0,0,canvas.width,canvas.height)
-    
-    
+    console.log(deltaTime);
     particleConfig();
     hue+=5;
     requestAnimationFrame(animate)
 }
-animate();
+animate(0);

@@ -75,7 +75,7 @@ class Particle{
 
     draw(){
         ctx.fillStyle = this.color;
-        ctx.strokeStyle = 'hsl('+hue+', 100%, .50%)';
+        ctx.strokeStyle = "white";
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI *2);

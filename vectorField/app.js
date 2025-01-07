@@ -10,11 +10,14 @@ window.onload = function(){
     canvas.height = window.innerHeight;
     flowField = new FlowFieldEffect(ctx, canvas.width, canvas.height);
     // flowField.animate(0);
+
+
 }
 const mouse = {
     x: 0,
     y: 0,
 }
+
 
 
 window.addEventListener('mousemove', function(e){
@@ -27,7 +30,7 @@ window.addEventListener('resize', function(){
     cancelAnimationFrame(flowFieldAnimation);
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    console.log(`${canvas.width} x ${canvas.height}`)
+    //console.log(`${canvas.width} x ${canvas.height}`)
     flowField = new FlowFieldEffect(ctx, canvas.width, canvas.height);
     flowField.animate(0);
 });
@@ -39,7 +42,7 @@ class FlowFieldEffect{
     constructor(ctx, width, height){
         this.#ctx = ctx;
         this.#width = width;
-        this.#height = height*2;
+        this.#height = height;
         this.#ctx.lineWidth = 2.5;
         this.#ctx.strokeStyle = 'white';
         this.lastTime = 0;
@@ -51,6 +54,7 @@ class FlowFieldEffect{
         this.#ctx.strokeStyle = this.gradient;
         this.radius = 1;
         this.vel =0.001;
+        this.#drawText();
     }
 
     #createGradient(){
@@ -61,6 +65,15 @@ class FlowFieldEffect{
         this.gradient.addColorStop('0.7','#555c33');
         this.gradient.addColorStop('0.9','#ffff33');
 
+    }
+
+    #drawText(){
+        console.log(this.#ctx);
+        const text = 'Hello'
+        this.#ctx.fillStyle ='white';
+        this.#ctx.strokeStyle ='White';
+        this.#ctx.font = '80px Helevetica'
+        this.#ctx.fillText(text, this.#width/2, this.#height/2);
     }
 
     #drawLine(angle,x, y){

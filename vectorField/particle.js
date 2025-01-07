@@ -87,7 +87,7 @@ class Particle{
 
 
 
-console.log(particlesArray);
+//console.log(particlesArray);
 
 function particleConfig(){
     for (let i = 0; i < particlesArray.length; i++){
@@ -140,6 +140,6 @@ function animate(timeStamp){
     particleConfig();
     hue+=5;
     requestAnimationFrame(animate)
-    console.log(interval)
+    //console.log(interval)
 }
 animate(0);

@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* background-image: url(./1038456.jpg); */
     background-size: cover;
     
 }
@@ -14,11 +13,4 @@
     top: 0;
     left: 0;
     
-}
-
-#canvas2{
-    position: absolute;
-    background: rgba(0, 0, 0, 0);
-    top: 0;
-    left: 0;
 }

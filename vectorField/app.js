@@ -9,7 +9,7 @@ window.onload = function(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     flowField = new FlowFieldEffect(ctx, canvas.width, canvas.height);
-    // flowField.animate(0);
+    flowField.animate(0);
 }
 const mouse = {
     x: 0,

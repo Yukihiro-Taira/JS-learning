@@ -1,7 +1,7 @@
 let canvas;
 let ctx;
 let flowField;
-let flowFeildAnimation
+let flowFieldAnimation
 
 window.onload = function(){
     canvas = document.getElementById('canvas1');
@@ -9,26 +9,28 @@ window.onload = function(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     flowField = new FlowFieldEffect(ctx, canvas.width, canvas.height);
-    flowField.animate(0);
+    // flowField.animate(0);
 }
-
-window.addEventListener('resize', function(){
-    cancelAnimationFrame(flowFeildAnimation);
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    flowField = new FlowFieldEffect(ctx, canvas.width, canvas.height);
-    flowField.animate(0);
-});
-
 const mouse = {
     x: 0,
     y: 0,
 }
 
+
 window.addEventListener('mousemove', function(e){
     mouse.x = e.x;
     mouse.y = e.y;
-})
+    flowField.animate(0);
+});
+
+window.addEventListener('resize', function(){
+    cancelAnimationFrame(flowFieldAnimation);
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    console.log(`${canvas.width} x ${canvas.height}`)
+    flowField = new FlowFieldEffect(ctx, canvas.width, canvas.height);
+    flowField.animate(0);
+});
 
 class FlowFieldEffect{
     #ctx;
@@ -37,19 +39,20 @@ class FlowFieldEffect{
     constructor(ctx, width, height){
         this.#ctx = ctx;
         this.#width = width;
-        this.#height = height;
+        this.#height = height*2;
         this.#ctx.lineWidth = 2.5;
         this.#ctx.strokeStyle = 'white';
         this.lastTime = 0;
         this.interval = 1000/60;
         this.timer = 0;
-        this.cellSize = 50;
+        this.cellSize = 15;
         this.gradient;
         this.#createGradient();
         this.#ctx.strokeStyle = this.gradient;
         this.radius = 1;
         this.vel =0.001;
     }
+
     #createGradient(){
         this.gradient = this.#ctx.createLinearGradient(0,0,this.#width,this.#height);
         this.gradient.addColorStop('0.1','#ff0133');
@@ -59,6 +62,7 @@ class FlowFieldEffect{
         this.gradient.addColorStop('0.9','#ffff33');
 
     }
+
     #drawLine(angle,x, y){
         let posx = x;
         let posy = y;
@@ -66,13 +70,14 @@ class FlowFieldEffect{
         let dx = mouse.x - posx;
         let dy = mouse.y - posy;
         let dist = dx*dx+dy*dy;
+        let length = dist * 0.0001;
 
-        let length = dist*0.0001;
         this.#ctx.beginPath();
         this.#ctx.moveTo(x, y);
         this.#ctx.lineTo(x+ + Math.cos(angle) * length,y + Math.sin(angle) * length);
         this.#ctx.stroke();
     }
+
     animate(timeStamp){
         const deltaTime = timeStamp - this.lastTime;
         this.lastTime = timeStamp;
@@ -82,7 +87,7 @@ class FlowFieldEffect{
             if (this.radius > 0.1 || this.radius < -0.1 ) this.vel *= -1; 
 
             for (let y = 0; y < this.#width; y+= this.cellSize){
-                for (let x = 0; x < this.#height; x += this.cellSize){
+                for (let x = 0; x < (this.#height)*2; x += this.cellSize){
                     const angle = (Math.cos(x*0.01) + Math.sin(y*0.01)) * this.radius;
                     this.#drawLine(angle,x,y);
                     //console.log(angle);
@@ -94,6 +99,6 @@ class FlowFieldEffect{
             this.timer += deltaTime;
         }
         //console.log(deltaTime);
-        flowFeildAnimation = requestAnimationFrame(this.animate.bind(this));
+        flowFieldAnimation = requestAnimationFrame(this.animate.bind(this));
     }
 }

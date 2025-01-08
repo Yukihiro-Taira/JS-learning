@@ -3,7 +3,9 @@ let ctx;
 
 window.addEventListener('load', function(){
     canvas = document.getElementById('canvas1');
-    ctx = canvas.getContext('2d');
+    ctx = canvas.getContext('2d', {
+        willReadFrequently: true
+    });
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     console.log(ctx);
@@ -34,8 +36,18 @@ window.addEventListener('load', function(){
             this.effect.context.fillRect(this.x, this.y, this.size, this.size);
         }
         update(){
-            this.x += (this.originX - this.x) * this.ease;
-            this.y += this.originY - this.y;
+            this.dx = this.effect.mouse.x - this.x;
+            this.dy = this.effect.mouse.y - this.y;
+            this.dist = (this.dx * this.dx + this.dy * this.dy) * Math.random();
+            this.force = -this.effect.mouse.radius / this.dist;
+
+            if(this.dist < this.effect.mouse.radius){
+                this.angle = Math.atan2(this.dy, this.dx)
+                this.velx += this.force *Math.cos(this.angle);
+                this.vely += this.force * Math.sin(this.angle);
+            }
+            this.x += (this.velx *= this.friction) + (this.originX - this.x) * this.ease;
+            this.y += (this.originY - this.y) * this.ease;
         }
     }
 
@@ -60,9 +72,9 @@ window.addEventListener('load', function(){
 
             //particle text
             this.particles = [];
-            this.gap = 1;
+            this.gap = 3;
             this.mouse ={
-                radius:2000000,
+                radius:20000,
                 x: 0,
                 y: 0
             }

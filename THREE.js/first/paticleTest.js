@@ -3,6 +3,8 @@ import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { lightPosition } from 'three/src/nodes/TSL.js';
 
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { Lensflare, LensflareElement } from 'three/addons/objects/Lensflare.js';
+import { fog } from 'three/tsl';
 //Setup//
 const width = window.innerWidth;
 const height = window.innerHeight;
@@ -27,6 +29,7 @@ const POPmin = -1000/2;
 const mouse = {
 	x: 0,
 	y: 0,
+	z: 0
 }
 
 
@@ -44,7 +47,11 @@ for ( let i = 0; i < POPcount; i++ ) {
 	vertices.push( x, y, z );
 }
 //geo
-const sphere = new THREE.SphereGeometry(1,32,16)
+const phiStart = 5
+const phiLength = 7;
+const sphere = new THREE.SphereGeometry(1,32,16,phiStart,phiLength
+
+)
 const geometry = new THREE.BufferGeometry();
 geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
 
@@ -62,7 +69,7 @@ const sphereMat = new THREE.MeshPhysicalMaterial({
 
 const material = new THREE.PointsMaterial( { 
 	color: 0x888888,
-	size: 1
+	size: .25
 
 } );
 
@@ -79,10 +86,12 @@ light2.position.set(-5, -6.56, -7.5);
 
 sphereMesh.position.set(0,0,-1);
 
+
+
 //Camera
 camera.position.z = 5;
 camera.position.set( 0, 0, 5 );
-controls.update();
+
 
 scene.add(sphereMesh);
 scene.add(light1,light2);
@@ -101,6 +110,8 @@ function animate(){
 	light2.position.z += 0.05;
 	light2.position.y += 0.05;
 
+
+	
 
 	controls.update();
     renderer.render(scene,camera)

@@ -3,8 +3,21 @@
     margin: 0;
     box-sizing: border-box;
     position: absolute;
+    font-family: roboto;
+
+
 }
 
-#canvas{
+#canvas1{
     position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+h1{
+    z-index: 1;
+    color: aliceblue;
+    text-transform: uppercase;
+    text-orientation: sideways-right;
+
 }

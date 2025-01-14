@@ -7,7 +7,7 @@ const height = window.innerHeight;
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 50, width/height, 0.1,1000);
 
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
 renderer.setSize(width, height);
 document.body.appendChild( renderer.domElement);
 
@@ -77,3 +77,10 @@ function animate(){
     renderer.render(scene,camera)
 }
 renderer.setAnimationLoop (animate);
+
+function handleWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+window.addEventListener('resize', handleWindowResize, true);

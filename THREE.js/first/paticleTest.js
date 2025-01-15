@@ -10,15 +10,19 @@ import { fog } from 'three/tsl';
 const width = window.innerWidth;
 const height = window.innerHeight;
 const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000000)
 const camera = new THREE.PerspectiveCamera( 50, width/height, 0.1,1000);
 const canvas = document.getElementById("canvas1");
 const ctx = canvas.getContext("2d");
-const renderer = new THREE.WebGLRenderer(canvas);
+const renderer = new THREE.WebGLRenderer({
+	antialias: true,
+	alpha: true,
+});
 
 renderer.setSize(width, height);
 document.body.appendChild( renderer.domElement);
 
-// const controls = new OrbitControls( camera, renderer.domElement );
+const controls = new OrbitControls( camera, renderer.domElement );
 //----------------------------------------------------------//
 const loader = new GLTFLoader();
 loader.load('./assets/scene.gltf',	function ( gltf ) {
@@ -161,9 +165,10 @@ function animate(){
 renderer.setAnimationLoop (animate);
 
 window.addEventListener("scroll", () => {
+	const scrolled = window.scrollY;
 	scrollPosY = (window.scrollY / document.body.clientHeight);
 	
-	console.log(scrollPosY)
+	console.log(scrolled)
   });
 
 

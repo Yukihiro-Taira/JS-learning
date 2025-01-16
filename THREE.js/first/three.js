@@ -7,8 +7,6 @@ import { fill } from 'three/src/extras/TextureUtils.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 
-
-
 gsap.registerPlugin(ScrollTrigger);
 
 const lenis = new Lenis();
@@ -23,9 +21,11 @@ gsap.ticker.add((time)=>{
 gsap.ticker.lagSmoothing(0);
 
 //Scene Setup
-
+const bgVideo = document.getElementById('video')
+bgVideo.play();
+const texture = new THREE.VideoTexture(bgVideo);
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xffffff);
+scene.background = texture;
 
 const camera = new THREE.PerspectiveCamera(
     75,
@@ -53,7 +53,7 @@ document.querySelector('.model').appendChild(renderer.domElement);
 
 //Lights
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 3);
+const ambientLight = new THREE.AmbientLight(0xffffff, 2);
 scene.add(ambientLight);
 
 const mainLight = new THREE.DirectionalLight(0xffffff, 1);
@@ -64,23 +64,23 @@ const fillLight = new THREE.DirectionalLight(0xffffff, 3);
 fillLight.position.set(-5, 0, -5)
 scene.add(fillLight);
 
-const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 2);
+const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.1);
 hemiLight.position.set(0, 25, 0);
 scene.add(hemiLight);
 
 
 //animate
-function basicAnima(){
-    renderer.render(scene,camera);
-    requestAnimationFrame(basicAnima);
-}
-basicAnima();
+// function basicAnima(){
+//     renderer.render(scene,camera);
+//     requestAnimationFrame(basicAnima);
+// }
+// basicAnima();
 
 //model LOAD
 
 let model;
 const loader = new GLTFLoader();
-loader.load('./assets/simple_cola_can.glb', ( gltf ) => {
+loader.load('./assets/abstract_core.glb', ( gltf ) => {
 
     const scale = 0;
     model = gltf.scene;
@@ -110,18 +110,18 @@ loader.load('./assets/simple_cola_can.glb', ( gltf ) => {
     model.scale.set(scale,scale,scale);
     playInitialAnimation();
 
-    cancelAnimationFrame(basicAnima)
+    // cancelAnimationFrame(basicAnima)
     animate();
 })
 
 //animation Variables
 const floatAmp = 0.2;
 const floatSpeed = 1.5;
-const rotationSpeed = 0.3;
+const rotationSpeed = 0.03;
 let isFloating = true;
 let currentScroll = 0;
 
-const stickeyHeight = window.innerHeight;
+const stickyHeight = window.innerHeight;
 const scannerSection = document.querySelector(".scanner");
 const scannerPos = scannerSection.offsetTop;
 const scanContainer = document.querySelector(".scan-container");
@@ -173,22 +173,17 @@ ScrollTrigger.create({
 ScrollTrigger.create({
     trigger: ".scanner",
     start: "top top",
-    end: `${stickeyHeight}px`,
+    end: `${stickyHeight}px`,
     pin: true,
     onEnter: () => {
         if(model){
             isFloating = false;
             model.position.y = 0;
 
-            // setTimeout(()=>{
-            //     scanSound,currentTime = 0;
-            //     scanSound.play();
-            // },500);
-            
             gsap.to(model.rotation,{
-                y: model.rotation.y +Math.Pi *2,
+                y: model.rotation.y + Math.PI *2,
                 duration: 1,
-                ease: "power2.in",
+                ease: "power2.inOut",
                 onComplete: () =>{
                     gsap.to(model.scale,{
                         x: 0,
@@ -229,20 +224,20 @@ lenis.on("scroll", (e)=>{
 function animate(){
     if (model) {
         if (isFloating){
-            const floatOffset = Math.sin(Date.now()*0.001 * floatSpeed)*floatAmp;
-            model.position.y = floatOffset;
+            const floatOffset = Math.sin(Date.now()*0.0001 * floatSpeed)*floatAmp;
+            model.position.y = floatOffset+200;
 
         }
 
         const scrollProgress = Math.min(currentScroll / scannerPos, 1);
-        console.log(scrollProgress)
+        // console.log(scrollProgress)
 
         if (scrollProgress < 1) {
-            model.rotation.x = scrollProgress * Math.Pi * 2;
+            model.rotation.x = scrollProgress * Math.PI * 2;
         }
 
         if (scrollProgress < 1) {
-            model.rotation.y += 0.001 * rotationSpeed;
+            model.rotation.y += 0.001 * rotationSpeed*Math.PI;
         }
     }
 
@@ -251,7 +246,7 @@ function animate(){
     requestAnimationFrame(animate);
 
 }
-// renderer.setAnimationLoop (animate);
+renderer.setAnimationLoop (animate);
 
 function handleWindowResize() {
 	camera.aspect = window.innerWidth / window.innerHeight;

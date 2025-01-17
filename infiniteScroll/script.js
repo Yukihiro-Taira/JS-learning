@@ -52,7 +52,7 @@ const createParallaxImg = (imageElement) =>{
     };
 
 
-};
+
 
 const update = (scroll) =>{
     if(!bounds)return;
@@ -61,13 +61,15 @@ const update = (scroll) =>{
     currentTranslateY = lerp(currentTranslateY, targetTranslateY, 0.1);
 
     if(Math.abs(currentTranslateY - targetTranslateY) > 0.01){
-        imageElement.style.transform = `translate(${currentTranslateY}px) scale(1.5)`
+        imageElement.style.transform = `translateY(${currentTranslateY}px) scale(1.5)`;
     }
 
-    updateBounds();
-    return {update, updateBounds};
-
 };
+
+updateBounds();
+return {update, updateBounds};
+};
+
 
 const getProjectData =(index) => {
     const dataIndex = 
@@ -98,9 +100,10 @@ const createProjectElement = (index) =>{
                     <h1>${projectNumber}</h1>
                 </div>
             </div>`
-       :`<div class="side>
+       :`<div class="side">
             <div class="title">
                 <h1>${data.title}</h1>
+                <h1>${projectNumber}</h1>
             </div>
         </div>
         <div class="side">
@@ -143,8 +146,8 @@ const checkAndCreateProjects = () => {
             index > currentIndex + config.cleanupThreshold
         ){
             projects.remove();
-            state.projects.delete();
-            state.parallaxImg.delete();
+            state.projects.delete(index);
+            state.parallaxImg.delete(index);
         }
     });
 };
@@ -152,7 +155,7 @@ const checkAndCreateProjects = () => {
 
 const getClosestSnapPoint = () => {
     const currentIndex = Math.round(-state.targetY / state.projectHeight);
-return -currentIndex * state.projectHeight;
+    return -currentIndex * state.projectHeight;
     
 };
 
@@ -170,7 +173,7 @@ const updateSnap = () =>{
 
     const t = 1 - Math.pow(1 - progress, 3);
 
-    state.targetY= state.snapStartY + (state.snapTarget - state.snapStartY) * t;
+    state.targetY= state.snapStartY + (state.snapTragetY - state.snapStartY) * t;
 
     if(progress >= 1){
         state.isSnapping = false;
@@ -204,9 +207,9 @@ const animate = () =>{
         const y = index *state.projectHeight + state.currentY;
         project.style.transform =`translateY${y}px)`;
 
-        const parallaxImg = state.parallaxImg.get(index);
-        if (parallaxImg){
-            parallaxImg.update(state.currentY);
+        const parallaxImage = state.parallaxImg.get(index);
+        if (parallaxImage){
+            parallaxImage.update(state.currentY);
         }
     });
 
@@ -218,7 +221,7 @@ const handleWheel = (e) =>{
     state.isSnapping = false;
     state.lastScrollTime + Date.now();
 
-    const scrollDelta =e.deltaY * config.scrollSpeed;
+    const scrollDelta = e.deltaY * config.scrollSpeed;
     state.targetY-= Math.max(
         Math.min(scrollDelta, config.maxVel),
         -config.maxVel
@@ -236,7 +239,7 @@ const handleTouchStart = (e) =>{
 const handleTouchMove = (e) =>{
     if(!state.isDragging) return;
     const deltaY = (e.touches[0].clientY - state.startY) *1.5;
-    state.targetY = state,lastY + deltaY;
+    state.targetY = state.lastY + deltaY;
     state.lastScrollTime =Date.now();
 };
 
@@ -248,9 +251,9 @@ const handleResize = () => {
     state.projectHeight = window.innerHeight;
     state.projects.forEach((project, index) => {
         project.style.transform = `translateY(${index * state.projectHeight}px)`;
-        const parallaxImg = state.parallaxImg.get(index);
-        if(parallaxImg){
-            parallaxImg.updateBounds();
+        const parallaxImage = state.parallaxImg.get(index);
+        if(parallaxImage){
+            parallaxImage.updateBounds();
         }
     });
 };

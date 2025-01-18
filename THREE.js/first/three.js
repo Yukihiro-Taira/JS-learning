@@ -69,18 +69,12 @@ hemiLight.position.set(0, 25, 0);
 scene.add(hemiLight);
 
 
-//animate
-// function basicAnima(){
-//     renderer.render(scene,camera);
-//     requestAnimationFrame(basicAnima);
-// }
-// basicAnima();
 
 //model LOAD
 
 let model;
 const loader = new GLTFLoader();
-loader.load('./assets/abstract_core.glb', ( gltf ) => {
+loader.load('./assets/simple_cola_can.glb', ( gltf ) => {
 
     const scale = 0;
     model = gltf.scene;
@@ -110,7 +104,6 @@ loader.load('./assets/abstract_core.glb', ( gltf ) => {
     model.scale.set(scale,scale,scale);
     playInitialAnimation();
 
-    // cancelAnimationFrame(basicAnima)
     animate();
 })
 
@@ -230,7 +223,7 @@ function animate(){
         }
 
         const scrollProgress = Math.min(currentScroll / scannerPos, 1);
-        // console.log(scrollProgress)
+
 
         if (scrollProgress < 1) {
             model.rotation.x = scrollProgress * Math.PI * 2;

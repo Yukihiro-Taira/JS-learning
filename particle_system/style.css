@@ -5,7 +5,7 @@
 
 #canvas1{
     position: absolute;
-    background: black;
+    background: transparent;
 
     display: flex;
     z-index: 1;

@@ -1,23 +1,24 @@
 const projectData = [
-    {title: "Euphoria",image: "/assets/1.jpg", isAlternate: false},
-    {title: "Scratcher",image: "/assets/2.jpg", isAlternate: true},
-    {title: "Ember",image: "/assets/3.jpg", isAlternate: false},
+    {title: "Euphoria",     image: "/assets/1.jpg", isAlternate: false},
+    {title: "Scratcher",    image: "/assets/2.jpg", isAlternate: true},
+    {title: "Ember",        image: "/assets/3.jpg", isAlternate: false},
     {title: "Luquid Soleil",image: "/assets/4.jpg", isAlternate: true},
-    {title: "Vacuum",image: "/assets/5.jpg", isAlternate: false},
-    {title: "Synthesis",image: "/assets/6.jpg", isAlternate: true},
+    {title: "Vacuum",       image: "/assets/5.jpg", isAlternate: false},
+    {title: "Synthesis",    image: "/assets/6.jpg", isAlternate: true},
 ];
 
 const lerp = (start, end, factor) => start + ( end - start ) * factor;
 
+//all the setting for scrolling
 const config = {
-    scrollSpeed: 0.75,
+    scrollSpeed: 1,
     lerpFactor: 0.05,
     bufferSize: 15,
     cleanupThreshold: 50,
     maxVel: 120,
     snapDuration: 500,
 };
-
+//all the Dynamic aspects of the scroll
 const state = {
     currentY: 0,
     targetY: 0,
@@ -51,23 +52,20 @@ const createParallaxImg = (imageElement) =>{
         }
     };
 
+    const update = (scroll) => {
+        if(!bounds)return;
+        const relativeScroll = -scroll - bounds.top;
+        targetTranslateY = relativeScroll * 0.2;
+        currentTranslateY = lerp(currentTranslateY, targetTranslateY, 0.1);
 
+        if(Math.abs(currentTranslateY - targetTranslateY) > 0.01){
+            imageElement.style.transform = `translateY(${currentTranslateY}px) scale(1.5)`;
+        }
+    
+    }   ;
 
-
-const update = (scroll) =>{
-    if(!bounds)return;
-    const relativeScroll = -scroll - bounds.top;
-    targetTranslateY = relativeScroll * 0.2;
-    currentTranslateY = lerp(currentTranslateY, targetTranslateY, 0.1);
-
-    if(Math.abs(currentTranslateY - targetTranslateY) > 0.01){
-        imageElement.style.transform = `translateY(${currentTranslateY}px) scale(1.5)`;
-    }
-
-};
-
-updateBounds();
-return {update, updateBounds};
+    updateBounds();
+    return {update, updateBounds};
 };
 
 
@@ -80,17 +78,17 @@ const getProjectData =(index) => {
 const createProjectElement = (index) =>{
     if(state.projects.has(index)) return;
 
-    const template = document.querySelector(".project-template");
+    const template = document.querySelector(".template");
     const project = template.cloneNode(true);
     project.style.display = "flex";
     project.classList.remove("template");
 
     const dataIndex = 
-    ((Math.abs(index)% projectData.length) + projectData.length) % projectData.length;
-    const data =getProjectData(index);
-    const projectNumber = (dataIndex +1).toString().padStart(2,"0");
+            ((Math.abs(index)% projectData.length) + projectData.length) % projectData.length;
+        const data =getProjectData(index);
+        const projectNumber = (dataIndex +1).toString().padStart(2,"0");
 
-    project.innerHTML = data.isAlternate
+        project.innerHTML = data.isAlternate
         ?`<div class="side">
             <div class="img"><img src="${data.image}" alt="${data.title}" /></div>
             </div>
@@ -134,7 +132,7 @@ const checkAndCreateProjects = () => {
     const minNeeded = currentIndex - config.bufferSize;
     const maxNeeded = currentIndex + config.bufferSize;
 
-    for(let i = minNeeded;i <= maxNeeded; i++){
+    for(let i = minNeeded; i <= maxNeeded; i++){
         if(!state.projects.has(i)){
             createProjectElement(i);
         }
@@ -159,12 +157,11 @@ const getClosestSnapPoint = () => {
     
 };
 
-const initSnap = () =>{
+const initSnap = () => {
     state.isSnapping = true;
     state.snapStartTime = Date.now();
     state.snapStartY = state.targetY;
-    state.snapTragetY = getClosestSnapPoint();
-    
+    state.snapTragetY = getClosestSnapPoint(); 
 };
 
 const updateSnap = () =>{
@@ -179,7 +176,7 @@ const updateSnap = () =>{
         state.isSnapping = false;
         state.targetY = state.snapTragetY;
     }
-}
+};
 
 const animate = () =>{
     const now = Date.now();
@@ -214,19 +211,19 @@ const animate = () =>{
     });
 
     requestAnimationFrame(animate);
-}
+};
 
 const handleWheel = (e) =>{
     e.preventDefault();
     state.isSnapping = false;
-    state.lastScrollTime + Date.now();
+    state.lastScrollTime = Date.now();
 
     const scrollDelta = e.deltaY * config.scrollSpeed;
-    state.targetY-= Math.max(
+    state.targetY -= Math.max(
         Math.min(scrollDelta, config.maxVel),
         -config.maxVel
     )
-}
+};
 
 const handleTouchStart = (e) =>{
     state.isDragging = true;
@@ -234,13 +231,13 @@ const handleTouchStart = (e) =>{
     state.startY =e.touches[0].clientY;
     state.lastY = state.targetY;
     state.lastScrollTime = Date.now();
-}
+};
 
 const handleTouchMove = (e) =>{
     if(!state.isDragging) return;
     const deltaY = (e.touches[0].clientY - state.startY) *1.5;
     state.targetY = state.lastY + deltaY;
-    state.lastScrollTime =Date.now();
+    state.lastScrollTime = Date.now();
 };
 
 const handleTouchEnd = () =>{
@@ -262,8 +259,8 @@ const initializeScroll = () =>{
     window.addEventListener("wheel", handleWheel, { passive: false});
     window.addEventListener("touchstart", handleTouchStart);
     window.addEventListener("touchmove", handleTouchMove);
-    window.addEventListener("touchstart", handleTouchEnd);
-    window.addEventListener("touchstart", handleResize);
+    window.addEventListener("touchend", handleTouchEnd);
+    window.addEventListener("resize", handleResize);
 
     createInitialProjects();
     animate();

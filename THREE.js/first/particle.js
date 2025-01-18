@@ -18,17 +18,11 @@ let hue = 0;
 
 //---------------------------------------------------------------------------//
 
-ctx.fillStyle = 'white';
-ctx.fillRect(w/2, h/2 , 150, 50);
-ctx.fillText = 'Loading...';
-console.log(ctx);
 
 window.addEventListener("resize", function(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    ctx.fillStyle = 'white';
-    ctx.fillRect(window.innerWidth/2, window.innerHeight/2 , 150, 50);
 });
 
 //---------------------------------------------------------------------------//
@@ -44,7 +38,7 @@ canvas.addEventListener("click", function(event){
     mouse.x = event.x;
     mouse.y = event.y;
     //change 'i' for to change particle count
-    for (let i = 0; i<100; i++){
+    for (let i = 0; i<10; i++){
     particlesArray.push(new Particle());
     };
 });
@@ -69,7 +63,7 @@ class Particle{
         this.size = Math.random()* 5 + 1;
         this.speedX = Math.random() * 3 - 1.5;
         this.speedY = Math.random() * 3 - 1.5;
-        this.color = 'hsl(' + hue + ', 100%, 50%)';
+        this.color = 0xf1f1f1;
         this.lastTime = 0;
     }
     update(){
@@ -92,7 +86,6 @@ class Particle{
 
 
 
-console.log(particlesArray);
 
 function particleConfig(){
     for (let i = 0; i < particlesArray.length; i++){
@@ -119,18 +112,13 @@ function particleConfig(){
     }
 }
 
-function animate(timeStamp){
+function animate(){
     //clear all pops on canvas
-    //ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     //create trails w/ cd
-    const deltaTime = timeStamp - this.lastTime;
-    this.lastTime = timeStamp;
-    ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
-    ctx.fillRect(0,0,canvas.width,canvas.height)
-    //console.log(deltaTime);
-    particleConfig();
+
     hue+=5;
     requestAnimationFrame(animate)
 }
-animate(0);
+animate();

@@ -32,7 +32,7 @@ img {
     list-style: none;
 }
 
-.project {
+.project{
     width: 100%;
     height: 100vh;
     display: flex;
@@ -43,7 +43,6 @@ img {
 }
 
 .side{
-    height: 100vh;
     flex: 1;
     height: 100%;
     overflow: hidden;
@@ -52,7 +51,7 @@ img {
 .img {
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
 
 }
 

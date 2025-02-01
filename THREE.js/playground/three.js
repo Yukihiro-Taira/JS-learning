@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
-
+import { fill } from 'three/src/extras/TextureUtils.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 
